@@ -1,0 +1,30 @@
+# Save as: .github/workflows/job_alerts.yml
+# Repo root must contain: job_alerts.py, sources.py, index.html
+# Settings > Secrets > Actions: TG_TOKEN, TG_CHAT_ID (optional, for phone alerts)
+# Settings > Pages: Deploy from branch "main", folder "/ (root)"  -> your live website
+name: Govt Job Bot
+on:
+  schedule:
+    - cron: "30 2,6,10,14 * * *"   # 8:00, 12:00, 16:00, 20:00 IST
+  workflow_dispatch: {}
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install requests beautifulsoup4
+      - run: python job_alerts.py
+        env:
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+      - name: Commit data
+        run: |
+          git config user.name "jobbot"
+          git config user.email "jobbot@users.noreply.github.com"
+          git add jobs.json jobs_public.json
+          git diff --cached --quiet || (git commit -m "update jobs" && git push)
