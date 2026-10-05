@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#1a56db">
 <title>Sarkari Jobs – All India, One Place</title>
 <style>
 :root{
@@ -25,10 +24,9 @@ html,body{margin:0}
 body{background:var(--bg);color:var(--text);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
 [hidden]{display:none!important}
 
-header{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);border-bottom:1px solid var(--line);z-index:20;padding:10px 14px;backdrop-filter:blur(8px)}
+header{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);border-bottom:1px solid var(--line);z-index:20;padding:10px 14px}
 .top{display:flex;gap:8px;align-items:center;flex-wrap:wrap;max-width:1200px;margin:0 auto}
-h1{font-size:18px;margin:0 12px 0 0;white-space:nowrap;display:flex;align-items:center;gap:6px}
-h1::before{content:"🎯";font-size:16px}
+h1{font-size:18px;margin:0 12px 0 0;white-space:nowrap}
 input[type=search],select{padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text);font-size:15px;min-width:0;font-family:inherit}
 input[type=search]:focus,select:focus{outline:2px solid var(--brand);outline-offset:-1px}
 #q{flex:1 1 220px}
@@ -36,7 +34,7 @@ input[type=search]:focus,select:focus{outline:2px solid var(--brand);outline-off
 .icon-btn:hover{background:var(--chip)}
 .tabs{display:flex;gap:6px;flex-wrap:wrap;max-width:1200px;margin:8px auto 0;overflow-x:auto;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
-.tab{border:1px solid var(--line);background:var(--card);color:var(--text);padding:7px 12px;border-radius:99px;font-size:14px;cursor:pointer;white-space:nowrap;transition:all .15s}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--text);padding:7px 12px;border-radius:99px;font-size:14px;cursor:pointer;white-space:nowrap}
 .tab:hover{border-color:var(--brand)}
 .tab.on{background:var(--brand);color:var(--brand-t);border-color:var(--brand);font-weight:600}
 .tab small{opacity:.75;margin-left:4px}
@@ -58,7 +56,7 @@ aside{align-self:start;position:sticky;top:130px;max-height:calc(100vh - 146px);
 .fh{display:none;justify-content:space-between;align-items:center;padding:8px 0;font-weight:600;position:sticky;top:0;background:var(--card);z-index:1}
 
 .chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
-.chip{background:var(--chip);color:var(--text);border:1px solid var(--line);border-radius:99px;padding:4px 10px;font-size:13px;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:4px}
+.chip{background:var(--chip);color:var(--text);border:1px solid var(--line);border-radius:99px;padding:4px 10px;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:4px;font-family:inherit}
 .chip:hover{border-color:var(--brand)}
 .chip.clear{background:transparent;color:var(--brand);font-weight:600}
 .bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:8px;flex-wrap:wrap}
@@ -70,7 +68,7 @@ aside{align-self:start;position:sticky;top:130px;max-height:calc(100vh - 146px);
 .card.compact{padding:10px 12px}
 .title{font-weight:600;margin:6px 0 4px;font-size:15px;line-height:1.35}
 .compact .title{font-size:14px}
-.badges{display:flex;gap:6px;flex-wrap:wrap;padding-right:32px}
+.badges{display:flex;gap:6px;flex-wrap:wrap;padding-right:34px}
 .b{font-size:12px;padding:2px 8px;border-radius:99px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
 .b.new,.b.open{background:var(--ok-bg);color:var(--ok);border-color:transparent}
 .b.soon,.b.star{background:var(--warn-bg);color:var(--warn);border-color:transparent}
@@ -78,11 +76,11 @@ aside{align-self:start;position:sticky;top:130px;max-height:calc(100vh - 146px);
 .b.saved{background:var(--brand);color:var(--brand-t);border-color:transparent}
 .last{font-size:13px;color:var(--muted);margin:2px 0 8px}
 .btns{display:flex;gap:8px;flex-wrap:wrap}
-a.btn{display:inline-block;padding:8px 12px;border-radius:8px;border:1px solid var(--line);color:var(--text);text-decoration:none;font-size:14px;transition:all .15s;background:var(--card)}
+a.btn{display:inline-block;padding:8px 12px;border-radius:8px;border:1px solid var(--line);color:var(--text);text-decoration:none;font-size:14px;background:var(--card)}
 a.btn:hover{border-color:var(--brand)}
 a.btn.primary{background:var(--brand);color:var(--brand-t);border-color:var(--brand);font-weight:600}
 a.btn.primary:hover{opacity:.9}
-.save-btn{position:absolute;top:10px;right:10px;background:var(--card);border:1px solid var(--line);border-radius:8px;width:30px;height:30px;cursor:pointer;font-size:15px;line-height:1;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .15s}
+.save-btn{position:absolute;top:10px;right:10px;background:var(--card);border:1px solid var(--line);border-radius:8px;width:30px;height:30px;cursor:pointer;font-size:15px;line-height:1;display:flex;align-items:center;justify-content:center;color:var(--muted)}
 .save-btn:hover{border-color:var(--brand);color:var(--brand)}
 .save-btn.on{background:var(--brand);color:var(--brand-t);border-color:var(--brand)}
 .empty{text-align:center;color:var(--muted);padding:40px 10px}
@@ -97,8 +95,6 @@ mark{background:var(--hl);color:var(--hl-text);padding:0 2px;border-radius:3px}
 .sk-line.short{width:40%}
 .sk-line.med{width:70%}
 @keyframes sk{0%{background-position:200% 0}100%{background-position:-200% 0}}
-
-.kbd{display:inline-block;padding:1px 6px;border:1px solid var(--line);border-radius:4px;font-size:11px;color:var(--muted);background:var(--chip);font-family:monospace}
 
 @media (max-width:820px){
   .wrap{grid-template-columns:1fr}
@@ -117,7 +113,7 @@ mark{background:var(--hl);color:var(--hl-text);padding:0 2px;border-radius:3px}
 <header>
   <div class="top">
     <h1>Sarkari Jobs</h1>
-    <input id="q" type="search" placeholder="Search: railway, ISRO, UKPSC, engineer…  (/)" autocomplete="off">
+    <input id="q" type="search" placeholder="Search: railway, ISRO, engineer…  (/)" autocomplete="off">
     <select id="sort" aria-label="Sort">
       <option value="new">Newest first</option>
       <option value="close">Closing soon</option>
@@ -151,7 +147,10 @@ const $ = id => document.getElementById(id);
 const el = (t,c,x)=>{const e=document.createElement(t); if(c) e.className=c; if(x!==undefined) e.textContent=x; return e;};
 const safeUrl = u => (typeof u==="string" && /^https?:\/\//i.test(u)) ? u : null;
 const debounce = (fn,ms=180) => { let t; return (...a)=>{clearTimeout(t); t=setTimeout(()=>fn(...a),ms);}; };
-const LS = { get:(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch{return d;}}, set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch{}} };
+const LS = {
+  get:(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch{return d;}},
+  set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch{}}
+};
 
 let ALL=[], META={}, shown=PAGE, tab="open", loadError=false, view="normal";
 let SEL = {sector:new Set(), org:new Set(), qual:new Set(), state:new Set(), posted:new Set(), extra:new Set()};
@@ -163,30 +162,27 @@ function daysLeft(j){ if(!j.deadline) return null; const d=new Date(j.deadline+"
 function status(j){ const n=daysLeft(j); if(n===null) return "unknown"; if(n<0) return "closed"; if(n<=7) return "soon"; return "open"; }
 function ageDays(j){ return (Date.now()-new Date(j.first_seen).getTime())/DAY; }
 
-/* ── Dynamic facet discovery ── */
 const FACET_DEFS = {
-  sector:{ label:"Sector",    get:j=>[j.sector].filter(Boolean), priority:1 },
-  org:   { label:"Organisation", get:j=>[j.source].filter(Boolean), priority:2, limit:8 },
-  qual:  { label:"Qualification", get:j=>(j.quals&&j.quals.length)?j.quals:["Not specified"], priority:3, limit:6 },
+  sector:{ label:"Sector",         get:j=>[j.sector].filter(Boolean), priority:1 },
+  org:   { label:"Organisation",   get:j=>[j.source].filter(Boolean), priority:2, limit:8 },
+  qual:  { label:"Qualification",  get:j=>(j.quals&&j.quals.length)?j.quals:["Not specified"], priority:3, limit:6 },
   state: { label:"State / Region", get:j=>[j.state||"All India"], priority:4, limit:8 },
-  posted:{ label:"Posted", get:j=>{const a=ageDays(j); return [a<=1?"Last 24 hours":a<=3?"Last 3 days":a<=7?"Last 7 days":"Older"];}, order:["Last 24 hours","Last 3 days","Last 7 days","Older"], priority:5 },
-  extra: { label:"Must have", get:j=>{const r=[]; if(j.apply) r.push("Apply link"); if(j.notification) r.push("Notification PDF"); if(j.ece) r.push("⭐ ECE fit"); if(j.deadline) r.push("Last date known"); return r;}, and:true, priority:6 }
+  posted:{ label:"Posted",         get:j=>{const a=ageDays(j); return [a<=1?"Last 24 hours":a<=3?"Last 3 days":a<=7?"Last 7 days":"Older"];}, order:["Last 24 hours","Last 3 days","Last 7 days","Older"], priority:5 },
+  extra: { label:"Must have",      get:j=>{const r=[]; if(j.apply) r.push("Apply link"); if(j.notification) r.push("Notification PDF"); if(j.ece) r.push("⭐ ECE fit"); if(j.deadline) r.push("Last date known"); return r;}, and:true, priority:6 }
 };
 let FACETS = Object.entries(FACET_DEFS).map(([key,def])=>({key,...def}));
 
 function buildFacetsFromData(jobs){
-  // Auto-discover extra keys present in data (e.g. "exam", "category")
   const known = new Set(Object.keys(FACET_DEFS));
+  const reserved = new Set(["title","link","apply","notification","website","first_seen","deadline","last_date","source","sector","state","quals","ece","id"]);
   const candidates = new Map();
   jobs.forEach(j=>{
     Object.keys(j).forEach(k=>{
-      if(known.has(k) || ["title","link","apply","notification","website","first_seen","deadline","last_date","source","sector","state","quals","ece","id"].includes(k)) return;
-      if(typeof j[k] === "string" || Array.isArray(j[k])) {
-        candidates.set(k,(candidates.get(k)||0)+1);
-      }
+      if(known.has(k)||reserved.has(k)) return;
+      const v=j[k];
+      if(typeof v==="string" || Array.isArray(v)) candidates.set(k,(candidates.get(k)||0)+1);
     });
   });
-  // Only add fields present in >30% of jobs
   [...candidates.entries()].filter(([k,c])=>c/jobs.length>0.3).forEach(([k])=>{
     if(FACETS.find(f=>f.key===k)) return;
     FACETS.push({
@@ -195,12 +191,12 @@ function buildFacetsFromData(jobs){
       get:j=>{const v=j[k]; return Array.isArray(v)?v:[v].filter(Boolean);},
       priority:99
     });
-    SEL[k] = new Set();
+    SEL[k]=new Set();
   });
 }
 
 function tabMatch(j){
-  if(tab==="saved") return SAVED.has(j.id || j.title);
+  if(tab==="saved") return SAVED.has(j.id||j.title);
   const s=status(j);
   if(tab==="open") return s!=="closed";
   if(tab==="soon") return s==="soon";
@@ -222,15 +218,13 @@ function matches(j, skip, ignoreTab){
   return FACETS.every(f=>f.key===skip || facetMatch(j,f));
 }
 
-/* ── URL state sync ── */
 function readURL(){
   const p = new URLSearchParams(location.search);
   if(p.has("q")) $("q").value = p.get("q");
   if(p.has("tab")) tab = p.get("tab");
   if(p.has("sort")) $("sort").value = p.get("sort");
-  if(p.has("saved") && p.get("saved")==="1") tab = "saved";
   FACETS.forEach(f=>{
-    const v = p.get("f_"+f.key);
+    const v=p.get("f_"+f.key);
     if(v && SEL[f.key]) v.split(",").forEach(x=>SEL[f.key].add(x));
   });
 }
@@ -240,8 +234,7 @@ const writeURL = debounce(()=>{
   if(tab && tab!=="open") p.set("tab",tab);
   if($("sort").value!=="new") p.set("sort",$("sort").value);
   FACETS.forEach(f=>{ if(SEL[f.key]?.size) p.set("f_"+f.key,[...SEL[f.key]].join(",")); });
-  const url = location.pathname + (p.toString()?"?"+p.toString():"");
-  history.replaceState(null,"",url);
+  history.replaceState(null,"",location.pathname+(p.toString()?"?"+p.toString():""));
 },300);
 
 function renderTabs(){
@@ -253,7 +246,7 @@ function renderTabs(){
   [["open","Open jobs"],["soon","Closing in 7 days"],["saved","⭐ Saved"],["all","All"],["closed","Closed"]]
     .forEach(([k,l])=>{
       const b=el("button","tab"+(tab===k?" on":""),l);
-      b.append(el("small","",c[k]||0));
+      b.append(el("small","",String(c[k]||0)));
       b.onclick=()=>{tab=k;shown=PAGE;render();};
       t.append(b);
     });
@@ -262,8 +255,7 @@ function renderTabs(){
 function renderFacets(){
   const box=$("facets"); box.replaceChildren();
   const activeTab = ALL.filter(j=>tabMatch(j));
-  FACETS.sort((a,b)=>(a.priority||50)-(b.priority||50));
-  FACETS.forEach(f=>{
+  FACETS.slice().sort((a,b)=>(a.priority||50)-(b.priority||50)).forEach(f=>{
     if(!SEL[f.key]) return;
     const rows=activeTab.filter(j=>matches(j,f.key));
     const counts=new Map();
@@ -314,18 +306,16 @@ function renderChips(){
   }
   const n=Object.values(SEL).reduce((a,s)=>a+s.size,0);
   const fc=$("fcount");
-  fc.textContent=n||"";
+  fc.textContent = n?String(n):"";
   fc.classList.toggle("on", n>0);
-  $("fbtn").setAttribute("aria-label", `Filters${n?" ("+n+" active)":""}`);
 }
 
 function hl(text, q){
   if(!q) return document.createTextNode(text);
   const frag=document.createDocumentFragment();
   const re=new RegExp("("+q.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+")","ig");
-  const parts=String(text).split(re);
-  parts.forEach((p,i)=>{
-    if(i%2===1){ const m=el("mark","",p); frag.append(m); }
+  String(text).split(re).forEach((p,i)=>{
+    if(i%2===1) frag.append(el("mark","",p));
     else if(p) frag.append(document.createTextNode(p));
   });
   return frag;
@@ -350,12 +340,11 @@ function renderSkeleton(){
 function renderList(){
   const q=$("q").value.trim().toLowerCase();
   const rows=ALL.filter(j=>matches(j,null));
-
   const s=$("sort").value;
-  if(s==="close")   rows.sort((a,b)=>(a.deadline||"9999").localeCompare(b.deadline||"9999"));
-  else if(s==="posted") rows.sort((a,b)=>(b.first_seen||"").localeCompare(a.first_seen||""));
-  else if(s==="org") rows.sort((a,b)=>(a.source||"").localeCompare(b.source||"")||(b.first_seen||"").localeCompare(a.first_seen||""));
-  else rows.sort((a,b)=>(b.first_seen||"").localeCompare(a.first_seen||""));
+  if(s==="close")        rows.sort((a,b)=>(a.deadline||"9999").localeCompare(b.deadline||"9999"));
+  else if(s==="posted")  rows.sort((a,b)=>(b.first_seen||"").localeCompare(a.first_seen||""));
+  else if(s==="org")     rows.sort((a,b)=>(a.source||"").localeCompare(b.source||"")||(b.first_seen||"").localeCompare(a.first_seen||""));
+  else                   rows.sort((a,b)=>(b.first_seen||"").localeCompare(a.first_seen||""));
 
   const list=$("list"); list.replaceChildren();
   if(!rows.length){
@@ -376,7 +365,6 @@ function renderList(){
 
       const save=el("button","save-btn"+(isSaved?" on":""), isSaved?"★":"☆");
       save.title = isSaved?"Remove from saved":"Save job";
-      save.setAttribute("aria-label", save.title);
       save.onclick=()=>{
         if(SAVED.has(id)) SAVED.delete(id); else SAVED.add(id);
         LS.set("sj_saved",[...SAVED]);
@@ -393,7 +381,7 @@ function renderList(){
       if(st==="closed") bd.append(el("span","b closed","Closed"));
       if(j.ece) bd.append(el("span","b star","⭐ ECE fit"));
       bd.append(el("span","b",j.sector||"Other"), el("span","b",j.source||"—"), el("span","b",j.state||"All India"));
-      (j.quals||[]).slice(0,3).forEach(q=>bd.append(el("span","b",q)));
+      (j.quals||[]).slice(0,3).forEach(qq=>bd.append(el("span","b",qq)));
 
       c.append(bd);
       const title=el("div","title"); title.append(hl(j.title||"Untitled", q)); c.append(title);
@@ -418,39 +406,42 @@ function render(){ renderTabs(); renderFacets(); renderChips(); renderList(); wr
 async function init(){
   renderSkeleton();
   const demo = new URLSearchParams(location.search).has("demo");
-  // Load saved filters from localStorage
+
   const savedSel = LS.get("sj_sel",null);
   if(savedSel) Object.entries(savedSel).forEach(([k,v])=>{ if(SEL[k]) v.forEach(x=>SEL[k].add(x)); });
   readURL();
 
-  // Theme
   const theme = LS.get("sj_theme",null);
   if(theme) document.documentElement.dataset.theme = theme;
   view = LS.get("sj_view","normal");
+  $("viewbtn").textContent = view==="compact"?"▥":"▤";
 
   try{
     const r = await fetch((demo?"jobs_demo.json":"jobs_public.json")+"?"+Date.now());
     if(!r.ok) throw new Error(r.status);
     const d = await r.json();
     ALL=d.jobs||[]; META=d;
-    ALL.forEach((j,i)=>{ if(!j.id) j.id = "job_"+i; });
+    ALL.forEach((j,i)=>{ if(!j.id) j.id="job_"+i; });
     buildFacetsFromData(ALL);
-    // Persist selection
-    const snapshot = {}; Object.entries(SEL).forEach(([k,v])=>{ if(v.size) snapshot[k]=[...v]; });
-    LS.set("sj_sel",snapshot);
+    const snap={}; Object.entries(SEL).forEach(([k,v])=>{ if(v.size) snap[k]=[...v]; });
+    LS.set("sj_sel",snap);
     $("demo").hidden=!demo;
   }catch(e){ loadError=true; }
   render();
 }
 
-const onSearch = debounce(()=>{shown=PAGE;render();},180);
-$("q").addEventListener("input", onSearch);
+$("q").addEventListener("input", debounce(()=>{shown=PAGE;render();},180));
 $("sort").addEventListener("change",()=>{shown=PAGE;render();});
 $("more").onclick=()=>{shown+=PAGE;renderList();};
 $("fbtn").onclick=()=>$("side").classList.add("open");
 $("fclose").onclick=$("fapply").onclick=()=>$("side").classList.remove("open");
 
-$("viewbtn").onclick=()=>{ view = view==="normal"?"compact":"normal"; LS.set("sj_view",view); $("viewbtn").textContent = view==="compact"?"▥":"▤"; renderList(); };
+$("viewbtn").onclick=()=>{
+  view = view==="normal"?"compact":"normal";
+  LS.set("sj_view",view);
+  $("viewbtn").textContent = view==="compact"?"▥":"▤";
+  renderList();
+};
 $("themebtn").onclick=()=>{
   const cur = document.documentElement.dataset.theme || (matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");
   const next = cur==="dark"?"light":"dark";
@@ -458,11 +449,23 @@ $("themebtn").onclick=()=>{
   LS.set("sj_theme", next);
 };
 
-// Keyboard shortcuts
 document.addEventListener("keydown",e=>{
   if(e.key==="/" && document.activeElement!==$("q")){ e.preventDefault(); $("q").focus(); }
   if(e.key==="Escape"){ $("side").classList.remove("open"); if(document.activeElement===$("q")) $("q").blur(); }
 });
 
-// Swipe to close drawer
-(()=>
+/* Swipe-left to close drawer */
+(function(){
+  const side=$("side"); let x0=null, y0=null;
+  side.addEventListener("touchstart",e=>{ const t=e.touches[0]; x0=t.clientX; y0=t.clientY; },{passive:true});
+  side.addEventListener("touchmove",e=>{
+    if(x0==null) return;
+    const t=e.touches[0], dx=t.clientX-x0, dy=t.clientY-y0;
+    if(Math.abs(dx)>Math.abs(dy) && dx<-40){ side.classList.remove("open"); x0=null; }
+  },{passive:true});
+})();
+
+init();
+</script>
+</body>
+</html>
