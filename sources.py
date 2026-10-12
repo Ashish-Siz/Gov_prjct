@@ -1,9 +1,30 @@
 """
 Sector-wise sources for all-India government jobs.
-NOTE: URLs were written from knowledge, not live-tested. Run:  python job_alerts.py --check
-It reports which URLs are dead/blocked so you can fix or delete them.
-Format: "Name": "url"   (add/remove freely)
+
+Structure:
+    SOURCES         — dict of {sector: {name: url}}
+    SOURCE_META     — dict of {sector: {flags}} telling the pipeline/frontend
+                      how to treat each sector
+    RECLASSIFY_AGGREGATORS
+                    — if True, job_alerts.py should move aggregator rows
+                      into their real sector using title keywords
+    dedupe_by_url() — helper to drop sources whose URL already appears
+                      under a different sector (prevents duplicate records)
+
+Run `python job_alerts.py --check` to report dead URLs.
 """
+
+# ---------------------------------------------------------------------------
+# FLAGS
+# ---------------------------------------------------------------------------
+
+# When True, job_alerts.py should reclassify rows whose `source` belongs to
+# an aggregator site into their true sector by scanning the title.
+RECLASSIFY_AGGREGATORS = True
+
+# ---------------------------------------------------------------------------
+# SOURCES
+# ---------------------------------------------------------------------------
 
 SOURCES = {
 
@@ -301,11 +322,6 @@ SOURCES = {
         "Sarkari Naukri (FJA all-India)": "https://www.freejobalert.com/government-jobs/",
         "Naukri Govt": "https://www.naukri.com/government-jobs",
     },
-}
-
-
-# ======================= ADDED: MORE SECTORS (v3) =======================
-SOURCES.update({
 
     # ---------------- FOREST, ENVIRONMENT, WILDLIFE ----------------
     "Forest-Env": {
@@ -446,4 +462,89 @@ SOURCES.update({
         "Mumbai/JNPA/Paradip Ports": "https://jnport.gov.in/",
         "Cochin Port": "https://cochinport.gov.in/",
     },
-})
+}
+
+
+# ===========================================================================
+# SOURCE_META — flags the pipeline and the frontend need per sector
+# ===========================================================================
+#
+# is_aggregator  — records from this sector are re-posted from other sources
+#                  and should be reclassified by keyword.
+# notice_heavy   — most records from this sector are notices, not job openings
+#                  (e.g. CGA posts mostly promotion circulars).
+# priority       — display order in the sidebar (lower = higher up).
+#
+# The frontend can read this via a small export step. For now, it documents
+# the intent so job_alerts.py can act on it.
+
+SOURCE_META = {
+    "Central":             {"is_aggregator": False, "notice_heavy": False, "priority": 1},
+    "Banking":             {"is_aggregator": False, "notice_heavy": False, "priority": 2},
+    "Railways":            {"is_aggregator": False, "notice_heavy": False, "priority": 3},
+    "Defence":             {"is_aggregator": False, "notice_heavy": False, "priority": 4},
+    "Police-Intel":        {"is_aggregator": False, "notice_heavy": False, "priority": 5},
+    "Judiciary":           {"is_aggregator": False, "notice_heavy": False, "priority": 6},
+    "States":              {"is_aggregator": False, "notice_heavy": False, "priority": 7},
+    "Teaching":            {"is_aggregator": False, "notice_heavy": False, "priority": 8},
+    "Health":              {"is_aggregator": False, "notice_heavy": False, "priority": 9},
+    "Science-Survey":      {"is_aggregator": False, "notice_heavy": False, "priority": 10},
+    "PSU-Tech":            {"is_aggregator": False, "notice_heavy": False, "priority": 11},
+    "PSU-More":            {"is_aggregator": False, "notice_heavy": False, "priority": 12},
+    "Customs-Tax":         {"is_aggregator": False, "notice_heavy": True,  "priority": 13},
+    "Metro":               {"is_aggregator": False, "notice_heavy": False, "priority": 14},
+    "Forest-Env":          {"is_aggregator": False, "notice_heavy": False, "priority": 15},
+    "Agri-Food":           {"is_aggregator": False, "notice_heavy": False, "priority": 16},
+    "Ministries-Bodies":   {"is_aggregator": False, "notice_heavy": True,  "priority": 17},
+    "State-Utilities":     {"is_aggregator": False, "notice_heavy": False, "priority": 18},
+    "Aggregators":         {"is_aggregator": True,  "notice_heavy": False, "priority": 99},
+}
+
+
+# ===========================================================================
+# HELPERS
+# ===========================================================================
+
+def dedupe_by_url():
+    """
+    Return a new SOURCES dict where no URL appears twice.
+
+    If two sectors point at the same URL, the one with lower `priority`
+    in SOURCE_META wins. This prevents the pipeline from fetching the same
+    page twice and producing duplicate records under two sectors.
+
+    Usage in job_alerts.py:
+        from sources import dedupe_by_url
+        SOURCES = dedupe_by_url()
+    """
+    seen = {}   # url -> (priority, sector, name)
+    cleaned = {sector: {} for sector in SOURCES}
+
+    for sector, items in SOURCES.items():
+        prio = SOURCE_META.get(sector, {}).get("priority", 50)
+        for name, url in items.items():
+            norm = url.rstrip("/").lower()
+            if norm in seen:
+                # duplicate — keep the higher-priority sector
+                prev_prio, prev_sector, prev_name = seen[norm]
+                if prio < prev_prio:
+                    # new one wins; remove from old
+                    cleaned[prev_sector].pop(prev_name, None)
+                    seen[norm] = (prio, sector, name)
+                    cleaned[sector][name] = url
+                # else: skip
+            else:
+                seen[norm] = (prio, sector, name)
+                cleaned[sector][name] = url
+
+    # drop empty sectors
+    return {s: items for s, items in cleaned.items() if items}
+
+
+def all_sources():
+    """Flat list of (sector, name, url) tuples. Handy for --check runs."""
+    out = []
+    for sector, items in SOURCES.items():
+        for name, url in items.items():
+            out.append((sector, name, url))
+    return out
